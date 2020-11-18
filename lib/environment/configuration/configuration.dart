@@ -3,13 +3,11 @@ import 'package:injectable/injectable.dart';
 class Configuration {
   String apiBaseUrl;
   String apiKey;
-  String titlePath;
-  String actorPath;
+  String genrePath;
 
   Configuration(@factoryParam Map<String, dynamic> map) {
-    apiBaseUrl = map['IMDB_BASE_URL'];
-    apiKey = map['IMDB_APP_KEY'];
-    titlePath = map['IMDB_TITLE_PATH'];
-    actorPath = map['IMDB_ACTOR_PATH'];
+    apiBaseUrl = map['BASE_API_URL'];
+    apiKey = map['API_KEY'];
+    genrePath = map['GENRE_PATH'];
   }
 }

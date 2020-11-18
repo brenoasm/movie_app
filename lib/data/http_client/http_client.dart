@@ -138,10 +138,9 @@ class HttpClient implements IHttpClient {
   String _queryBuilder(String path, Map<String, dynamic> query) {
     final buffer = StringBuffer()..write(_configuration.apiBaseUrl + path);
 
+    buffer.write('?api_key=${_configuration.apiKey}&');
+
     if (query != null) {
-      if (query.isNotEmpty) {
-        buffer.write('?');
-      }
       query.forEach((key, value) {
         buffer.write('$key=$value&');
       });

@@ -6,6 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/environment/di/bootstrap.dart';
 
 import 'package:movie_app/ui/pages/home/home_page.dart';
+import 'package:movie_app/ui/themes/dark_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,10 +29,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Movie App',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: darkTheme(context),
       home: HomePage(),
     );
   }

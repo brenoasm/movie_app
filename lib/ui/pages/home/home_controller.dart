@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
-import 'package:movie_app/domain/usecases/example_usecase.dart';
+import 'package:movie_app/domain/entities/genre/genre.dart';
+import 'package:movie_app/domain/usecases/get_genres_usecase.dart';
 import 'package:movie_app/shared/disposeable.dart';
 
 part 'home_controller.g.dart';
@@ -9,21 +10,33 @@ part 'home_controller.g.dart';
 class HomeController = _HomeController with _$HomeController;
 
 abstract class _HomeController with Store implements Disposeable {
-  final ExampleUsageUsecase _exampleUsageUsecase;
+  final GetGenresUsecase _getGenresUsecase;
 
-  _HomeController(this._exampleUsageUsecase);
+  _HomeController(this._getGenresUsecase) {
+    _loadGenres();
+  }
 
   @observable
-  ObservableFuture<String> someTextObservable;
+  ObservableFuture<List<Genre>> genresObservable;
 
-  bool get someTextHasError => someTextObservable?.error != null ?? false;
+  bool get genresHasError => genresObservable?.error != null ?? false;
 
   @computed
-  FutureStatus get someTextStatus => someTextObservable?.status;
+  FutureStatus get genresStatus => genresObservable?.status;
+
+  @computed
+  bool get genreIsLoading =>
+      genresStatus != null && genresStatus == FutureStatus.pending;
+
+  @observable
+  bool loading = false;
 
   @action
-  Future<void> onPressed() async {
-    someTextObservable = _exampleUsageUsecase().asObservable();
+  void changeLoading(bool value) => loading = value;
+
+  @action
+  Future<void> _loadGenres() async {
+    genresObservable = _getGenresUsecase().asObservable();
   }
 
   @override
