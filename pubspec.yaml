@@ -1,0 +1,40 @@
+name: movie_app
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+scripts:
+  watch: flutter packages pub run build_runner watch --delete-conflicting-outputs
+  build: flutter packages pub run build_runner build --delete-conflicting-outputs
+
+dependencies:
+  injectable: ^1.0.5
+  get_it: ^5.0.1
+  mobx: ^1.2.1+4
+  flutter_mobx: ^1.1.0+2
+  mobx_codegen: ^1.1.2
+  http: ^0.12.2
+  flutter_dotenv: ^2.1.0
+
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.0
+
+dev_dependencies:
+  injectable_generator: ^1.0.6
+  build_runner: ^1.10.4
+
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - envs/
