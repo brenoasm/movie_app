@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:movie_app/ui/pages/home/home_controller.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class TrendingListWidget extends StatelessWidget {
   final HomeController controller;
@@ -43,6 +44,7 @@ class TrendingListWidget extends StatelessWidget {
         return ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: trendingMovies.length,
+          cacheExtent: 500,
           itemBuilder: (context, index) {
             final trendingMovie = trendingMovies[index];
 
@@ -52,11 +54,12 @@ class TrendingListWidget extends StatelessWidget {
                 horizontal: 10,
               ),
               width: 150,
-              decoration: BoxDecoration(
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
+                child: FadeInImage.memoryNetwork(
+                  placeholder: kTransparentImage,
+                  image: trendingMovie.posterPath,
                   fit: BoxFit.fill,
-                  image: NetworkImage(trendingMovie.posterPath),
                 ),
               ),
             );
