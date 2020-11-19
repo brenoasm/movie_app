@@ -9,12 +9,33 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on _HomeController, Store {
+  Computed<bool> _$genresHasErrorComputed;
+
+  @override
+  bool get genresHasError =>
+      (_$genresHasErrorComputed ??= Computed<bool>(() => super.genresHasError,
+              name: '_HomeController.genresHasError'))
+          .value;
+  Computed<bool> _$trendingMoviesHasErrorComputed;
+
+  @override
+  bool get trendingMoviesHasError => (_$trendingMoviesHasErrorComputed ??=
+          Computed<bool>(() => super.trendingMoviesHasError,
+              name: '_HomeController.trendingMoviesHasError'))
+      .value;
   Computed<FutureStatus> _$genresStatusComputed;
 
   @override
   FutureStatus get genresStatus => (_$genresStatusComputed ??=
           Computed<FutureStatus>(() => super.genresStatus,
               name: '_HomeController.genresStatus'))
+      .value;
+  Computed<FutureStatus> _$trendingMoviesStatusComputed;
+
+  @override
+  FutureStatus get trendingMoviesStatus => (_$trendingMoviesStatusComputed ??=
+          Computed<FutureStatus>(() => super.trendingMoviesStatus,
+              name: '_HomeController.trendingMoviesStatus'))
       .value;
   Computed<bool> _$genreIsLoadingComputed;
 
@@ -23,6 +44,13 @@ mixin _$HomeController on _HomeController, Store {
       (_$genreIsLoadingComputed ??= Computed<bool>(() => super.genreIsLoading,
               name: '_HomeController.genreIsLoading'))
           .value;
+  Computed<bool> _$trendingMoviesIsLoadingComputed;
+
+  @override
+  bool get trendingMoviesIsLoading => (_$trendingMoviesIsLoadingComputed ??=
+          Computed<bool>(() => super.trendingMoviesIsLoading,
+              name: '_HomeController.trendingMoviesIsLoading'))
+      .value;
 
   final _$genresObservableAtom = Atom(name: '_HomeController.genresObservable');
 
@@ -36,6 +64,23 @@ mixin _$HomeController on _HomeController, Store {
   set genresObservable(ObservableFuture<List<Genre>> value) {
     _$genresObservableAtom.reportWrite(value, super.genresObservable, () {
       super.genresObservable = value;
+    });
+  }
+
+  final _$trendingMoviesObservableAtom =
+      Atom(name: '_HomeController.trendingMoviesObservable');
+
+  @override
+  ObservableFuture<List<TrendingMovie>> get trendingMoviesObservable {
+    _$trendingMoviesObservableAtom.reportRead();
+    return super.trendingMoviesObservable;
+  }
+
+  @override
+  set trendingMoviesObservable(ObservableFuture<List<TrendingMovie>> value) {
+    _$trendingMoviesObservableAtom
+        .reportWrite(value, super.trendingMoviesObservable, () {
+      super.trendingMoviesObservable = value;
     });
   }
 
@@ -61,6 +106,15 @@ mixin _$HomeController on _HomeController, Store {
     return _$_loadGenresAsyncAction.run(() => super._loadGenres());
   }
 
+  final _$_loadTrendingMoviesAsyncAction =
+      AsyncAction('_HomeController._loadTrendingMovies');
+
+  @override
+  Future<void> _loadTrendingMovies() {
+    return _$_loadTrendingMoviesAsyncAction
+        .run(() => super._loadTrendingMovies());
+  }
+
   final _$_HomeControllerActionController =
       ActionController(name: '_HomeController');
 
@@ -79,9 +133,14 @@ mixin _$HomeController on _HomeController, Store {
   String toString() {
     return '''
 genresObservable: ${genresObservable},
+trendingMoviesObservable: ${trendingMoviesObservable},
 loading: ${loading},
+genresHasError: ${genresHasError},
+trendingMoviesHasError: ${trendingMoviesHasError},
 genresStatus: ${genresStatus},
-genreIsLoading: ${genreIsLoading}
+trendingMoviesStatus: ${trendingMoviesStatus},
+genreIsLoading: ${genreIsLoading},
+trendingMoviesIsLoading: ${trendingMoviesIsLoading}
     ''';
   }
 }

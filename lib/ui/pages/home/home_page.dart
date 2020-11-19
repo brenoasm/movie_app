@@ -6,6 +6,7 @@ import 'package:movie_app/ui/pages/home/widgets/genre_list/genre_list_widget.dar
 import 'package:movie_app/ui/pages/home/widgets/home_appbar/home_appbar_widget.dart';
 import 'package:movie_app/ui/pages/home/widgets/movies_carousel/movies_carousel_widget.dart';
 import 'package:movie_app/ui/pages/home/widgets/section_container/section_container_widget.dart';
+import 'package:movie_app/ui/pages/home/widgets/trending_list/trending_list_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,49 +21,54 @@ class _HomePageState extends WidgetState<HomePage, HomeController> {
         appBar: HomeAppbarWidget(),
         body: LayoutBuilder(
           builder: (context, constraints) {
-            return Observer(
-              builder: (_) {
-                if (controller.loading) {
-                  return Container();
-                }
+            return RefreshIndicator(
+              onRefresh: controller.onRefresh,
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Observer(
+                  builder: (_) {
+                    if (controller.loading) {
+                      return Container();
+                    }
 
-                return Container(
-                  child: Column(
-                    children: [
-                      SectionContainerWidget(
-                        margin: EdgeInsets.only(
-                          top: constraints.maxHeight * 0.05,
-                        ),
-                        height: constraints.maxHeight * 0.35,
-                        child: MovieCarouselWidget(),
+                    return Container(
+                      child: Column(
+                        children: [
+                          SectionContainerWidget(
+                            margin: EdgeInsets.only(
+                              top: constraints.maxHeight * 0.05,
+                            ),
+                            height: constraints.maxHeight * 0.35,
+                            child: MovieCarouselWidget(),
+                          ),
+                          SectionContainerWidget(
+                            title: 'Categories',
+                            margin: EdgeInsets.only(
+                              top: constraints.maxHeight * 0.02,
+                            ),
+                            height: constraints.maxHeight * 0.20,
+                            child: GenreListWidget(
+                              controller: controller,
+                            ),
+                          ),
+                          SectionContainerWidget(
+                            title: 'Trending',
+                            // titleButtonText: 'More',
+                            // onTitleButtonPressed: () {},
+                            margin: EdgeInsets.only(
+                              top: constraints.maxHeight * 0.01,
+                            ),
+                            height: constraints.maxHeight * 0.35,
+                            child: TrendingListWidget(
+                              controller: controller,
+                            ),
+                          ),
+                        ],
                       ),
-                      SectionContainerWidget(
-                        title: 'Categories',
-                        margin: EdgeInsets.only(
-                          top: constraints.maxHeight * 0.05,
-                        ),
-                        height: constraints.maxHeight * 0.20,
-                        child: GenreListWidget(
-                          controller: controller,
-                        ),
-                      ),
-                      SectionContainerWidget(
-                        title: 'Trending',
-                        titleButtonText: 'More',
-                        onTitleButtonPressed: () {},
-                        margin: EdgeInsets.only(
-                          top: constraints.maxHeight * 0.02,
-                        ),
-                        height: constraints.maxHeight * 0.30,
-                        child: Container(
-                          color: Colors.blue,
-                          child: Text('topper'),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+              ),
             );
           },
         ),

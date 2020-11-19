@@ -47,9 +47,14 @@ class GenreListWidget extends StatelessWidget {
             final genre = genres[index];
 
             return Container(
-              color: index.isEven ? Colors.grey.shade700 : Colors.grey.shade400,
+              key: Key(genre.id.toString()),
               margin: EdgeInsets.symmetric(
                 horizontal: 10,
+              ),
+              decoration: BoxDecoration(
+                color:
+                    index.isEven ? Colors.grey.shade700 : Colors.grey.shade400,
+                borderRadius: BorderRadius.circular(15),
               ),
               width: 100,
               child: Center(
