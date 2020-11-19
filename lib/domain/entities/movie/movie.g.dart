@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'trending_movie.dart';
+part of 'movie.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TrendingMovie _$TrendingMovieFromJson(Map<String, dynamic> json) {
-  return TrendingMovie(
+Movie _$MovieFromJson(Map<String, dynamic> json) {
+  return Movie(
     id: json['id'] as int,
     adult: json['adult'] as bool,
     backdropPath: json['backdropPath'] as String,
@@ -25,8 +25,7 @@ TrendingMovie _$TrendingMovieFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$TrendingMovieToJson(TrendingMovie instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$MovieToJson(Movie instance) => <String, dynamic>{
       'id': instance.id,
       'adult': instance.adult,
       'backdropPath': instance.backdropPath,

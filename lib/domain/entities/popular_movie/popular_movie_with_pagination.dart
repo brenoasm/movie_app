@@ -2,10 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:movie_app/domain/entities/movie/movie.dart';
 import 'package:movie_app/shared/pagination.dart';
 
-part 'trending_movie_with_pagination.g.dart';
+part 'popular_movie_with_pagination.g.dart';
 
 @JsonSerializable()
-class TrendingMovieWithPagination implements Pagination<Movie> {
+class PopularMovieWithPagination implements Pagination<Movie> {
   @override
   int page;
 
@@ -18,15 +18,15 @@ class TrendingMovieWithPagination implements Pagination<Movie> {
   @override
   int totalResults;
 
-  TrendingMovieWithPagination({
+  PopularMovieWithPagination({
     this.page,
     this.results,
     this.totalPages,
     this.totalResults,
   });
 
-  factory TrendingMovieWithPagination.fromJson(Map<String, dynamic> json) =>
-      _$TrendingMovieWithPaginationFromJson(json);
+  factory PopularMovieWithPagination.fromJson(Map<String, dynamic> json) =>
+      _$PopularMovieWithPaginationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TrendingMovieWithPaginationToJson(this);
+  Map<String, dynamic> toJson() => _$PopularMovieWithPaginationToJson(this);
 }

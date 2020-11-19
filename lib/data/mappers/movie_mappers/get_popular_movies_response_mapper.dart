@@ -1,22 +1,22 @@
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/data/responses/trending_responses/trending_responses.dart';
+import 'package:movie_app/data/responses/movie_responses/movie_responses.dart';
 import 'package:movie_app/domain/entities/movie/movie.dart';
-import 'package:movie_app/domain/entities/trending_movie/trending_movie_with_pagination.dart';
+import 'package:movie_app/domain/entities/popular_movie/popular_movie_with_pagination.dart';
 import 'package:movie_app/environment/configuration/configuration.dart';
 import 'package:movie_app/shared/mapper.dart';
 
 @injectable
-class GetTrendingMoviesResponseMapper
+class GetPopularMoviesResponseMapper
     implements
-        Mapper<TrendingMovieResponseWithPagination,
-            TrendingMovieWithPagination> {
+        Mapper<PopularMoviesWithPaginationResponse,
+            PopularMovieWithPagination> {
   final Configuration _configuration;
 
-  GetTrendingMoviesResponseMapper(this._configuration);
+  GetPopularMoviesResponseMapper(this._configuration);
 
   @override
-  TrendingMovieWithPagination mapTo(TrendingMovieResponseWithPagination from) =>
-      TrendingMovieWithPagination(
+  PopularMovieWithPagination mapTo(PopularMoviesWithPaginationResponse from) =>
+      PopularMovieWithPagination(
         page: from.page,
         totalPages: from.totalPages,
         totalResults: from.totalResults,

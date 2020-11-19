@@ -1,27 +1,33 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'trending_movie.g.dart';
+part 'movie.g.dart';
 
 @JsonSerializable()
-class TrendingMovie {
+class Movie {
   int id;
   bool adult;
-  @JsonKey(nullable: true)
+  @JsonKey(nullable: true, name: 'backdrop_path')
   String backdropPath;
+  @JsonKey(name: 'genre_ids')
   List<int> genreIds;
+  @JsonKey(name: 'original_language')
   String originalLanguage;
+  @JsonKey(name: 'original_title')
   String originalTitle;
   String overview;
-  @JsonKey(nullable: true)
+  @JsonKey(nullable: true, name: 'poster_path')
   String posterPath;
+  @JsonKey(name: 'release_date')
   String releaseDate;
   String title;
   bool video;
+  @JsonKey(name: 'vote_average')
   double voteAverage;
+  @JsonKey(name: 'vote_count')
   int voteCount;
   double popularity;
 
-  TrendingMovie({
+  Movie({
     this.id,
     this.adult,
     this.backdropPath,
@@ -38,8 +44,7 @@ class TrendingMovie {
     this.popularity,
   });
 
-  factory TrendingMovie.fromJson(Map<String, dynamic> json) =>
-      _$TrendingMovieFromJson(json);
+  factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TrendingMovieToJson(this);
+  Map<String, dynamic> toJson() => _$MovieToJson(this);
 }

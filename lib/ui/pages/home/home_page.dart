@@ -25,48 +25,42 @@ class _HomePageState extends WidgetState<HomePage, HomeController> {
               onRefresh: controller.onRefresh,
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
-                child: Observer(
-                  builder: (_) {
-                    if (controller.loading) {
-                      return Container();
-                    }
-
-                    return Container(
-                      child: Column(
-                        children: [
-                          SectionContainerWidget(
-                            margin: EdgeInsets.only(
-                              top: constraints.maxHeight * 0.05,
-                            ),
-                            height: constraints.maxHeight * 0.35,
-                            child: MovieCarouselWidget(),
-                          ),
-                          SectionContainerWidget(
-                            title: 'Categories',
-                            margin: EdgeInsets.only(
-                              top: constraints.maxHeight * 0.02,
-                            ),
-                            height: constraints.maxHeight * 0.20,
-                            child: GenreListWidget(
-                              controller: controller,
-                            ),
-                          ),
-                          SectionContainerWidget(
-                            title: 'Trending',
-                            // titleButtonText: 'More',
-                            // onTitleButtonPressed: () {},
-                            margin: EdgeInsets.only(
-                              top: constraints.maxHeight * 0.01,
-                            ),
-                            height: constraints.maxHeight * 0.35,
-                            child: TrendingListWidget(
-                              controller: controller,
-                            ),
-                          ),
-                        ],
+                child: Container(
+                  child: Column(
+                    children: [
+                      SectionContainerWidget(
+                        margin: EdgeInsets.only(
+                          top: constraints.maxHeight * 0.05,
+                        ),
+                        height: constraints.maxHeight * 0.40,
+                        child: MovieCarouselWidget(
+                          controller: controller,
+                        ),
                       ),
-                    );
-                  },
+                      SectionContainerWidget(
+                        title: 'Categories',
+                        margin: EdgeInsets.only(
+                          top: constraints.maxHeight * 0.01,
+                        ),
+                        height: constraints.maxHeight * 0.15,
+                        child: GenreListWidget(
+                          controller: controller,
+                        ),
+                      ),
+                      SectionContainerWidget(
+                        title: 'Trending',
+                        // titleButtonText: 'More',
+                        // onTitleButtonPressed: () {},
+                        margin: EdgeInsets.only(
+                          top: constraints.maxHeight * 0.01,
+                        ),
+                        height: constraints.maxHeight * 0.35,
+                        child: TrendingListWidget(
+                          controller: controller,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

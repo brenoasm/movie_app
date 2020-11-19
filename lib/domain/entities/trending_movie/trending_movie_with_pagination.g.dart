@@ -11,9 +11,8 @@ TrendingMovieWithPagination _$TrendingMovieWithPaginationFromJson(
   return TrendingMovieWithPagination(
     page: json['page'] as int,
     results: (json['results'] as List)
-        ?.map((e) => e == null
-            ? null
-            : TrendingMovie.fromJson(e as Map<String, dynamic>))
+        ?.map(
+            (e) => e == null ? null : Movie.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     totalPages: json['totalPages'] as int,
     totalResults: json['totalResults'] as int,

@@ -1,10 +1,10 @@
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/domain/entities/trending_movie/trending_movie.dart';
+import 'package:movie_app/domain/entities/movie/movie.dart';
 import 'package:movie_app/domain/repositories_interfaces/trending_repository_interface.dart';
 import 'package:movie_app/shared/usecase.dart';
 
 mixin GetTrendingMoviesUsecase implements Usecase {
-  Future<List<TrendingMovie>> call();
+  Future<List<Movie>> call();
 }
 
 @Injectable(as: GetTrendingMoviesUsecase)
@@ -14,7 +14,7 @@ class GetTrendingMovies implements GetTrendingMoviesUsecase {
   GetTrendingMovies(this._trendingRepository);
 
   @override
-  Future<List<TrendingMovie>> call() async {
+  Future<List<Movie>> call() async {
     final trendingMoviesWithPagination =
         await _trendingRepository.getTrendingMovies();
 

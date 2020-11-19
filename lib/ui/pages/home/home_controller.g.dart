@@ -23,6 +23,13 @@ mixin _$HomeController on _HomeController, Store {
           Computed<bool>(() => super.trendingMoviesHasError,
               name: '_HomeController.trendingMoviesHasError'))
       .value;
+  Computed<bool> _$topPopularMoviesHasErrorComputed;
+
+  @override
+  bool get topPopularMoviesHasError => (_$topPopularMoviesHasErrorComputed ??=
+          Computed<bool>(() => super.topPopularMoviesHasError,
+              name: '_HomeController.topPopularMoviesHasError'))
+      .value;
   Computed<FutureStatus> _$genresStatusComputed;
 
   @override
@@ -37,6 +44,14 @@ mixin _$HomeController on _HomeController, Store {
           Computed<FutureStatus>(() => super.trendingMoviesStatus,
               name: '_HomeController.trendingMoviesStatus'))
       .value;
+  Computed<FutureStatus> _$topPopularMoviesStatusComputed;
+
+  @override
+  FutureStatus get topPopularMoviesStatus =>
+      (_$topPopularMoviesStatusComputed ??= Computed<FutureStatus>(
+              () => super.topPopularMoviesStatus,
+              name: '_HomeController.topPopularMoviesStatus'))
+          .value;
   Computed<bool> _$genreIsLoadingComputed;
 
   @override
@@ -51,6 +66,30 @@ mixin _$HomeController on _HomeController, Store {
           Computed<bool>(() => super.trendingMoviesIsLoading,
               name: '_HomeController.trendingMoviesIsLoading'))
       .value;
+  Computed<bool> _$topPopularMoviesIsLoadingComputed;
+
+  @override
+  bool get topPopularMoviesIsLoading => (_$topPopularMoviesIsLoadingComputed ??=
+          Computed<bool>(() => super.topPopularMoviesIsLoading,
+              name: '_HomeController.topPopularMoviesIsLoading'))
+      .value;
+
+  final _$currentPopularMovieIndexAtom =
+      Atom(name: '_HomeController.currentPopularMovieIndex');
+
+  @override
+  int get currentPopularMovieIndex {
+    _$currentPopularMovieIndexAtom.reportRead();
+    return super.currentPopularMovieIndex;
+  }
+
+  @override
+  set currentPopularMovieIndex(int value) {
+    _$currentPopularMovieIndexAtom
+        .reportWrite(value, super.currentPopularMovieIndex, () {
+      super.currentPopularMovieIndex = value;
+    });
+  }
 
   final _$genresObservableAtom = Atom(name: '_HomeController.genresObservable');
 
@@ -71,31 +110,33 @@ mixin _$HomeController on _HomeController, Store {
       Atom(name: '_HomeController.trendingMoviesObservable');
 
   @override
-  ObservableFuture<List<TrendingMovie>> get trendingMoviesObservable {
+  ObservableFuture<List<Movie>> get trendingMoviesObservable {
     _$trendingMoviesObservableAtom.reportRead();
     return super.trendingMoviesObservable;
   }
 
   @override
-  set trendingMoviesObservable(ObservableFuture<List<TrendingMovie>> value) {
+  set trendingMoviesObservable(ObservableFuture<List<Movie>> value) {
     _$trendingMoviesObservableAtom
         .reportWrite(value, super.trendingMoviesObservable, () {
       super.trendingMoviesObservable = value;
     });
   }
 
-  final _$loadingAtom = Atom(name: '_HomeController.loading');
+  final _$topPopularMoviesObservableAtom =
+      Atom(name: '_HomeController.topPopularMoviesObservable');
 
   @override
-  bool get loading {
-    _$loadingAtom.reportRead();
-    return super.loading;
+  ObservableFuture<List<Movie>> get topPopularMoviesObservable {
+    _$topPopularMoviesObservableAtom.reportRead();
+    return super.topPopularMoviesObservable;
   }
 
   @override
-  set loading(bool value) {
-    _$loadingAtom.reportWrite(value, super.loading, () {
-      super.loading = value;
+  set topPopularMoviesObservable(ObservableFuture<List<Movie>> value) {
+    _$topPopularMoviesObservableAtom
+        .reportWrite(value, super.topPopularMoviesObservable, () {
+      super.topPopularMoviesObservable = value;
     });
   }
 
@@ -115,15 +156,24 @@ mixin _$HomeController on _HomeController, Store {
         .run(() => super._loadTrendingMovies());
   }
 
+  final _$_loadTopPopularMoviesAsyncAction =
+      AsyncAction('_HomeController._loadTopPopularMovies');
+
+  @override
+  Future<void> _loadTopPopularMovies() {
+    return _$_loadTopPopularMoviesAsyncAction
+        .run(() => super._loadTopPopularMovies());
+  }
+
   final _$_HomeControllerActionController =
       ActionController(name: '_HomeController');
 
   @override
-  void changeLoading(bool value) {
+  void onTopPopularMoviesPageChanged(int index) {
     final _$actionInfo = _$_HomeControllerActionController.startAction(
-        name: '_HomeController.changeLoading');
+        name: '_HomeController.onTopPopularMoviesPageChanged');
     try {
-      return super.changeLoading(value);
+      return super.onTopPopularMoviesPageChanged(index);
     } finally {
       _$_HomeControllerActionController.endAction(_$actionInfo);
     }
@@ -132,15 +182,19 @@ mixin _$HomeController on _HomeController, Store {
   @override
   String toString() {
     return '''
+currentPopularMovieIndex: ${currentPopularMovieIndex},
 genresObservable: ${genresObservable},
 trendingMoviesObservable: ${trendingMoviesObservable},
-loading: ${loading},
+topPopularMoviesObservable: ${topPopularMoviesObservable},
 genresHasError: ${genresHasError},
 trendingMoviesHasError: ${trendingMoviesHasError},
+topPopularMoviesHasError: ${topPopularMoviesHasError},
 genresStatus: ${genresStatus},
 trendingMoviesStatus: ${trendingMoviesStatus},
+topPopularMoviesStatus: ${topPopularMoviesStatus},
 genreIsLoading: ${genreIsLoading},
-trendingMoviesIsLoading: ${trendingMoviesIsLoading}
+trendingMoviesIsLoading: ${trendingMoviesIsLoading},
+topPopularMoviesIsLoading: ${topPopularMoviesIsLoading}
     ''';
   }
 }
